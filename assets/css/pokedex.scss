@@ -1,0 +1,48 @@
+#pokedex {
+    background-color: rgb(224, 40, 26);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+
+    #pokedex-head{
+        display: flex;
+        margin: 20px 0;
+        align-items: center;
+
+        #pokedex-light{
+            min-height: 70px;
+            min-width: 70px;
+            border-radius: 50%;
+            background-color: cornflowerblue;
+            border: 3px solid rgb(49, 70, 107);
+        }
+        #pokemon-name{
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 0;
+            margin-left: 20px;
+            color: rgb(0, 106, 255);
+            color: white;
+        }
+    }
+
+    #pokemon-sprite {
+        background-color: gray;
+        border-radius: 8px;
+        border: 2px solid gray;
+        background-color: whitesmoke;
+    }
+
+    ul {
+        border-radius: 4px;
+        li {
+            list-style: none;
+            padding: 10px;
+            background-color: rgb(231, 231, 14);
+            border-radius: 8px;
+            color: black;
+        }
+    }
+}

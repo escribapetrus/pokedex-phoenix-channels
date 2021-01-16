@@ -1,0 +1,48 @@
+<section class="phx-hero">
+  <h1><%= gettext "%{name}", name: "Pokedex" %></h1>
+  
+  <input type="text" id="pokemon-search" name="pokemon-search" placeholder="Pikachu">
+  <button id="search-button">search</button>
+  <button id="clear-button">clear</button>
+</section>
+
+<section id="pokedex">
+  <div id="pokedex-head">
+    <div id="pokedex-light"></div>
+    <h2 id="pokemon-name"></h2>
+  </div>
+  <div class="row">
+    <article class="column">
+      <div id="pokemon-sprite"></div>
+      <h3>Stats</h3>
+      <ul id="pokemon-stats">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h3>Abilities</h3>
+      <ul id="pokemon-abilities">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </article>
+    <article class="column">
+      <h3>Info</h3>
+      <ul id="pokemon-info">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h3>Types</h3>
+      <ul id="pokemon-types">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </article>
+  </div>
+</section>
