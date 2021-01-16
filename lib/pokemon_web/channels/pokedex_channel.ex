@@ -27,6 +27,10 @@ defmodule PokemonWeb.PokedexChannel do
     end
   end
 
+  def handle_in("clear_pokedex", _payload, socket) do
+    {:reply, {:ok, %{from: "pokedex", body: "clear pokedex"}}, socket}
+  end
+
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (pokedex:lobby).
   @impl true

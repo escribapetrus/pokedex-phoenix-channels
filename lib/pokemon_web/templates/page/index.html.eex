@@ -10,6 +10,8 @@
   <div id="pokedex-head">
     <div id="pokedex-light"></div>
     <h2 id="pokemon-name"></h2>
+    <button id="pokemon-evolve">evolve</button>
+
   </div>
   <div class="row">
     <article class="column">

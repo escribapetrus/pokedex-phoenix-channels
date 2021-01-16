@@ -3,6 +3,8 @@
 // }
 
 export function renderPokemon({name, height, weight, id, types, abilities, stats, sprites}){
+    let light = document.querySelector("#pokedex-light");
+    light.style.backgroundColor = "rgb(100, 200, 0)"
     renderSprite(sprites.other["official-artwork"]["front_default"]);
     renderName(name);
     renderTypes(types);
@@ -70,4 +72,42 @@ function renderInfo(id, height, weight){
         a.appendChild(aText);
         box.appendChild(a)
     })
+}
+
+export function handleError(reason){
+    let light = document.querySelector("#pokedex-light"),
+        head = document.querySelector("#pokemon-name"),
+        headText = document.createTextNode(reason.message)
+
+    resetPokedex();
+    light.style.backgroundColor = "red"
+    head.appendChild(headText);
+}
+
+function resetPokedex(){
+    let light = document.querySelector("#pokedex-light"),
+        data = [
+            document.querySelector("#pokemon-name"),
+            document.querySelector("#pokemon-types"),
+            document.querySelector("#pokemon-sprite"),
+            document.querySelector("#pokemon-stats"),
+            document.querySelector("#pokemon-info"),
+            document.querySelector("#pokemon-abilities"),
+        ];
+    data.forEach(d => {d.innerHTML = ""})
+    light.style.backgroundColor = "cornflowerblue"
+}
+
+export function clearPokedex(){
+    let light = document.querySelector("#pokedex-light"),
+        data = [
+            document.querySelector("#pokemon-name"),
+            document.querySelector("#pokemon-types"),
+            document.querySelector("#pokemon-sprite"),
+            document.querySelector("#pokemon-stats"),
+            document.querySelector("#pokemon-info"),
+            document.querySelector("#pokemon-abilities"),
+        ];
+    data.forEach(d => {d.innerHTML = ""})
+    light.style.backgroundColor = "cornflowerblue"
 }

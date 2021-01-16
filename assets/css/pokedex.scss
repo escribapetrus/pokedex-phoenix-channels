@@ -14,7 +14,7 @@
             min-width: 70px;
             border-radius: 50%;
             background-color: cornflowerblue;
-            border: 3px solid rgb(49, 70, 107);
+            border: 3px solid rgb(70, 70, 70);
         }
         #pokemon-name{
             text-align: center;
@@ -26,6 +26,13 @@
             color: rgb(0, 106, 255);
             color: white;
         }
+        #pokemon-evolve{
+            margin-bottom: 0;
+            margin-left: auto;
+            background-color: rgb(100, 200, 0);
+            border: 1px solid gray;
+
+        }
     }
 
     #pokemon-sprite {
@@ -33,6 +40,7 @@
         border-radius: 8px;
         border: 2px solid gray;
         background-color: whitesmoke;
+        margin-bottom: 20px;
     }
 
     ul {

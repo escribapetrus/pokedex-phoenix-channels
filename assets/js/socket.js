@@ -1,6 +1,6 @@
 import {Socket} from "phoenix"
 
-import {renderPokemon} from "./pokedex.js"
+import {renderPokemon, handleError, clearPokedex} from "./pokedex.js"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -50,18 +50,29 @@ socket.connect()
 
 let channel = socket.channel("pokedex:lobby", {}),
     search = document.querySelector("#pokemon-search"),
-    searchButton = document.querySelector("#search-button");
+    searchButton = document.querySelector("#search-button"),
+    clearButton = document.querySelector("#clear-button");
 
 search.addEventListener("keypress", e => {
   if (e.keyCode === 13) {
     e.preventDefault();
-    searchPokemon()
+    searchPokemon();
   }
 });
 
 searchButton.addEventListener("click", () => {
-  searchPokemon()
+  searchPokemon();
 });
+
+clearButton.addEventListener("click", () => {
+  channel
+  .push("clear_pokedex", {})
+  .receive("ok", resp => {
+    console.log(resp);
+    clearPokedex();
+  })
+
+})
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
@@ -75,7 +86,7 @@ function searchPokemon(){
     renderPokemon(body)
   })
   .receive("error", reason => {
-    console.log(reason)
+    handleError(reason)
   })
   search.value = "";
 }
