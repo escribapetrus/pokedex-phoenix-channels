@@ -33,6 +33,7 @@
       </ul>
     </article>
     <article class="column">
+      <div id="pokemon-evolutions"></div>
       <h3>Info</h3>
       <ul id="pokemon-info">
         <li></li>
@@ -48,3 +49,4 @@
     </article>
   </div>
 </section>
+

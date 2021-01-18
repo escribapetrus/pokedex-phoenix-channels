@@ -53,4 +53,17 @@
             color: black;
         }
     }
+
+    #pokemon-evolutions{
+        ul {
+            li {
+                background-color: rgb(37, 37, 37);
+                color: #64c800;
+                cursor: pointer;
+                &:hover {
+                    background-color: black;
+                }
+            }
+        }
+    }
 }

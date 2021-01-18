@@ -1,5 +1,6 @@
 defmodule PokemonWeb.PokedexChannel do
   use PokemonWeb, :channel
+  alias Pokemon.Pokedex
 
   @impl true
   def join("pokedex:lobby", payload, socket) do
@@ -10,15 +11,18 @@ defmodule PokemonWeb.PokedexChannel do
     end
   end
 
-  # Channels can be used in a request/response fashion
-  # by sending replies to requests from the client
-  @impl true
-  def handle_in("ping", payload, socket) do
-    {:reply, {:ok, payload}, socket}
+  def handle_in("pokemon_search", %{"body" => body}, socket) do
+    case Pokedex.search(body) do
+      {:ok, result} ->
+        {:ok, result} = Jason.encode(result)
+        {:reply, {:ok, %{from: "pokedex", body: result}}, socket}
+      {:error, reason} ->
+        {:reply, {:error, reason}, socket}
+    end
   end
 
-  def handle_in("pokemon_search", %{"body" => body}, socket) do
-    case Pokemon.Pokedex.search(body) do
+  def handle_in("pokemon_evolve", %{"body" => body}, socket) do
+    case Pokedex.evolution_of(body) do
       {:ok, result} ->
         {:ok, result} = Jason.encode(result)
         {:reply, {:ok, %{from: "pokedex", body: result}}, socket}

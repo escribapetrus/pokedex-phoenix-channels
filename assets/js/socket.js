@@ -1,6 +1,6 @@
 import {Socket} from "phoenix"
 
-import {renderPokemon, handleError, clearPokedex} from "./pokedex.js"
+import {renderPokemon, renderEvolutions, handleError, clearPokedex} from "./pokedex.js"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -51,38 +51,56 @@ socket.connect()
 let channel = socket.channel("pokedex:lobby", {}),
     search = document.querySelector("#pokemon-search"),
     searchButton = document.querySelector("#search-button"),
-    clearButton = document.querySelector("#clear-button");
+    clearButton = document.querySelector("#clear-button"),
+    evolveButton = document.querySelector("#pokemon-evolve");
 
 search.addEventListener("keypress", e => {
   if (e.keyCode === 13) {
     e.preventDefault();
-    searchPokemon();
+    searchPokemon(search.value);
   }
 });
 
 searchButton.addEventListener("click", () => {
-  searchPokemon();
+  searchPokemon(search.value);
 });
 
 clearButton.addEventListener("click", () => {
   channel
   .push("clear_pokedex", {})
-  .receive("ok", resp => {
-    console.log(resp);
+  .receive("ok", res => {
+    console.log(res);
     clearPokedex();
   })
+})
 
+evolveButton.addEventListener("click", () => {
+  let activePokemon = document.querySelector("#pokemon-name").innerText.toLowerCase()
+
+  channel
+  .push("pokemon_evolve", {body: activePokemon})
+  .receive("ok", res => {
+    let {chain} = JSON.parse(res.body)
+    renderEvolutions(chain)
+
+    let evoBox = document.querySelector("#pokemon-evolutions"),
+        evo = document.querySelectorAll("li");
+        evo.forEach(e => {
+          e.addEventListener("click", (ev) => searchPokemon(ev.target.innerText))
+        })
+  })
+  .receive("error", reason => console.log(reason))
 })
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", res => { console.log("Joined successfully", res) })
+  .receive("error", res => { console.log("Unable to join", res) })
 
-function searchPokemon(){
+function searchPokemon(name){
   channel
-  .push("pokemon_search", {body: search.value})
-  .receive("ok", reply => {
-    let body = JSON.parse(reply.body)
+  .push("pokemon_search", {body: name})
+  .receive("ok", res => {
+    let body = JSON.parse(res.body)
     renderPokemon(body)
   })
   .receive("error", reason => {
