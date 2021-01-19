@@ -16,6 +16,9 @@ defmodule PokemonWeb.Router do
   scope "/", PokemonWeb do
     pipe_through :browser
 
+    get "/users", UserController, :index
+    get "/users/create", UserController, :new
+    post "/users", UserController, :create
     get "/", PageController, :index
   end
 

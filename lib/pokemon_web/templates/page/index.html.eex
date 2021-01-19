@@ -1,6 +1,4 @@
 <section class="phx-hero">
-  <h1><%= gettext "%{name}", name: "Pokedex" %></h1>
-  
   <input type="text" id="pokemon-search" name="pokemon-search" placeholder="Pikachu">
   <button id="search-button">search</button>
   <button id="clear-button">clear</button>
@@ -49,4 +47,3 @@
     </article>
   </div>
 </section>
-
